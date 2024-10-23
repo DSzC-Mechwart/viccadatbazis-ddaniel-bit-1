@@ -123,5 +123,34 @@ namespace ViccAdatbazis.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction("DislajkVicc", new { id = vicc.Id }, vicc.NemTetszik);
         }
+        public async Task<IActionResult> OnPostLikeAsync(int id)
+        {
+            Vicc? vicc = await _context.Viccek.FindAsync(id);
+            if (vicc == null)
+            {
+                return NotFound();
+            }
+
+            vicc.Tetszik += 1;
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnPostDislikeAsync(int id)
+        {
+            Vicc? vicc = await _context.Viccek.FindAsync(id); 
+            if (vicc == null)
+            {
+                return NotFound();
+            }
+
+            vicc.NemTetszik += 1;
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+
+
     }
 }
