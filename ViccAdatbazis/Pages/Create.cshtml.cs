@@ -30,10 +30,7 @@ namespace ViccAdatbazis.Pages
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            
 
             _context.Viccek.Add(Vicc);
             await _context.SaveChangesAsync();
